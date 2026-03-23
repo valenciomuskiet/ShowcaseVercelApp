@@ -3,7 +3,7 @@ import "./App.css";
 
 function HomePage() {
   return (
-    <main className="page">
+    <main className="home-page">
       <div className="background">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
@@ -11,46 +11,75 @@ function HomePage() {
       </div>
 
       <section className="hero">
-        <div className="badge">Live showcase • Hosting met Vercel</div>
+        <div className="badge"> Valencio's Showcase • Hosting met Vercel</div>
 
         <h1>
-          Deploy je eigen <span>web app</span>
+          Deploy jouw project binnen 3 minuten met
+          <br />
+          <span>Vercel </span>
         </h1>
 
-        <p className="subtitle">
-          Van lokale code naar een live website op het wereldwijde web — simpel,
-          snel en professioneel met Vercel.
+        <p className="subtitle hero-subtitle">
+          Van lokale code naar een snelle, professionele live in lachwekkend hoog tempo. Een
+          simpele deployment workflow die modern oogt en direct resultaat geeft.
         </p>
 
         <div className="actions">
           <Link className="primary link-button" to="/3-stappen">
-            Je eigen web apps deployen met Vercel in 3 stappen
+            3 Step Walktrough
           </Link>
 
-          <a
-            className="secondary link-button"
-            href="https://valenciosaez.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Mijn laatste project
-          </a>
         </div>
       </section>
     </main>
   );
 }
 
+type StepSectionProps = {
+  number: string;
+  title: string;
+  text: string;
+  videoSrc: string;
+  reverse?: boolean;
+};
+
+function StepSection({
+  number,
+  title,
+  text,
+  videoSrc,
+  reverse = false,
+}: StepSectionProps) {
+  return (
+    <section className={`step-section ${reverse ? "reverse" : ""}`}>
+      <div className="step-media">
+        <div className="video-frame">
+          <video controls className="step-video-large" preload="metadata">
+            <source src={videoSrc} type="video/mp4" />
+            Je browser ondersteunt deze video niet.
+          </video>
+        </div>
+      </div>
+
+      <div className="step-content">
+        <span className="step-label">Stap {number}</span>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+    </section>
+  );
+}
+
 function StepsPage() {
   return (
-    <main className="page">
+    <main className="steps-layout">
       <div className="background">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
         <div className="grid" />
       </div>
 
-      <section className="hero steps-page">
+      <section className="steps-hero">
         <div className="badge">3 stappen • Vercel deployment</div>
 
         <h1>
@@ -58,43 +87,40 @@ function StepsPage() {
         </h1>
 
         <p className="subtitle">
-          Dit is de simpele workflow om je eigen web app live te zetten met
-          Vercel.
+          Scroll door de pagina en volg stap voor stap hoe je jouw website of app
+          live zet met Vercel.
         </p>
-
-        <div className="steps">
-          <div className="step-card">
-            <span className="step-number">01</span>
-            <h2>Push je code naar Github</h2>
-            <p>
-              Zet je project op GitHub zodat Vercel je repository kan importeren.
-            </p>
-          </div>
-
-          <div className="step-card">
-            <span className="step-number">02</span>
-            <h2>Importeer in Vercel</h2>
-            <p>
-              Koppel je repository en laat Vercel automatisch builden en
-              deployen.
-            </p>
-          </div>
-
-          <div className="step-card">
-            <span className="step-number">03</span>
-            <h2>Ga live</h2>
-            <p>
-              Na je deploy staat je web app direct online met een publieke link.
-            </p>
-          </div>
-        </div>
-
-        <div className="actions">
-          <Link className="secondary link-button" to="/">
-            Terug naar home
-          </Link>
-        </div>
       </section>
+
+      <div className="steps-wrapper">
+        <StepSection
+          number="01"
+          title="Push je code"
+          text="Upload je project naar GitHub zodat Vercel je repository direct kan importeren. Dit vormt de basis van een snelle en professionele deployment workflow."
+          videoSrc="/video/stap1.mp4"
+        />
+
+        <StepSection
+          number="02"
+          title="Importeer in Vercel"
+          text="Koppel je GitHub-account aan Vercel en selecteer je repository. Vercel herkent automatisch je projectstructuur en zet de buildinstellingen voor je klaar."
+          videoSrc="/video/stap2.mp4"
+          reverse
+        />
+
+        <StepSection
+          number="03"
+          title="Ga live"
+          text="Na het deployen ontvang je direct een publieke link. Je project staat meteen online en toekomstige updates kunnen automatisch opnieuw gedeployed worden."
+          videoSrc="/video/stap3.mp4"
+        />
+      </div>
+
+      <div className="bottom-actions">
+        <Link className="secondary link-button" to="/">
+          Terug naar home
+        </Link>
+      </div>
     </main>
   );
 }
